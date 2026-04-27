@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iurii Kudasov | Business Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        const profiles = {
+            bdr: {
+                title: "Business Development Representative",
+                description: "BDR with technical and business background. Experienced in B2B communication, lead generation, and digital product support. Skilled in identifying growth opportunities, building partnerships, and supporting sales pipelines.",
+                skills: ["B2B Sales & Lead Generation", "Client Acquisition", "Market Research & Analysis", "CRM & Sales Funnel", "Negotiation & Communication", "Business Strategy Support"],
+                tag: "BDR"
+            },
+            client: {
+                title: "Client Relations Coordinator",
+                description: "Client Relations Coordinator with strong communication skills and experience managing client interactions in digital and technical projects. Focused on building long-term relationships, coordinating requests, and ensuring high-quality service delivery.",
+                skills: ["Client Communication & Support", "Stakeholder Management", "Problem Solving & Conflict Resolution", "Project Coordination", "CRM & Workflow Management", "Cross-functional Collaboration"],
+                tag: "CRC"
+            },
+            marketing: {
+                title: "Digital Marketing Specialist",
+                description: "Digital Marketing Specialist with hands-on experience in performance marketing, website optimization, and content creation. Strong analytical mindset with a focus on traffic growth, user experience, and campaign efficiency.",
+                skills: ["Google Ads & Paid Traffic", "SEO & Website Optimization", "Content Creation", "Analytics & Performance Tracking", "UX/UI Improvement", "Marketing Campaign Management"],
+                tag: "DMS"
+            }
+        }
+
+        function switchProfile(profileId) {
+            const profile = profiles[profileId];
+            
+            document.getElementById('profile-title').textContent = profile.title;
+            document.getElementById('profile-description').textContent = profile.description;
+            document.getElementById('profile-tag').textContent = profile.tag;
+            
+            const skillsContainer = document.getElementById('skills-container');
+            skillsContainer.innerHTML = '';
+            profile.skills.forEach(skill => {
+                skillsContainer.innerHTML += `
+                    <div class="p-4 bg-white/5 rounded-xl border border-white/10 card-hover">
+                        <div class="font-medium">${skill}</div>
+                    </div>
+                `;
+            });
+
+            document.querySelectorAll('.profile-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-black');
+                btn.classList.add('bg-white/10', 'text-white');
+            });
+            document.querySelector(`[data-profile="${profileId}"]`).classList.remove('bg-white/10', 'text-white');
+            document.querySelector(`[data-profile="${profileId}"]`).classList.add('bg-white', 'text-black');
+
+            window.history.pushState({}, '', `#${profileId}`);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '') || 'bdr';
+            switchProfile(hash);
+        });
+    </script>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        .line-gradient {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .bg-grid {
+            background-image: radial-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0f] text-white min-h-screen bg-grid">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-[#0a0a0f]/80 border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-semibold">IK</div>
+            <div class="hidden md:flex gap-8 text-sm text-white/60">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20 px-6">
+        <div class="max-w-6xl mx-auto">
+
+            <!-- Profile Switcher -->
+            <div class="flex gap-2 mb-12 justify-center fade-in">
+                <button onclick="switchProfile('bdr')" data-profile="bdr" class="profile-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-white text-black">
+                    Business Development
+                </button>
+                <button onclick="switchProfile('client')" data-profile="client" class="profile-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-white/10 text-white">
+                    Client Relations
+                </button>
+                <button onclick="switchProfile('marketing')" data-profile="marketing" class="profile-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-white/10 text-white">
+                    Digital Marketing
+                </button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <div id="profile-title" class="text-white/50 text-sm uppercase tracking-widest mb-3">Business Development Representative</div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                        Iurii <span class="gradient-text">Kudasov</span>
+                    </h1>
+                    <p id="profile-description" class="text-white/70 text-lg leading-relaxed mb-8 max-w-xl">
+                        BDR with technical and business background. Experienced in B2B communication, lead generation, and digital product support. Skilled in identifying growth opportunities, building partnerships, and supporting sales pipelines.
+                    </p>
+                    
+                    <div class="flex gap-4 flex-wrap">
+                        <a href="#contact" class="px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-white/90 transition-all">
+                            Get in touch
+                        </a>
+                        <a href="#experience" class="px-6 py-3 border border-white/20 rounded-lg hover:bg-white/5 transition-all">
+                            View experience
+                        </a>
+                    </div>
+                </div>
+
+                <div class="fade-in delay-2 relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-3xl blur-3xl"></div>
+                    <div class="relative aspect-square bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/10 flex items-center justify-center">
+                            <div class="text-center">
+                                <div id="profile-tag" class="text-8xl font-bold gradient-text">BDR</div>
+                                <div class="text-white/50 mt-2">Barcelona, Spain</div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="fade-in">
+                <div class="w-12 h-1 line-gradient rounded-full mb-4"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">About Me</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Skills -->
+                <div class="md:col-span-2 fade-in delay-1">
+                    <h3 class="text-xl font-semibold mb-6">Core Skills</h3>
+                    <div id="skills-container" class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 card-hover">
+                            <div class="font-medium">B2B Sales & Lead Generation</div>
+                        </div>
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 card-hover">
+                            <div class="font-medium">Client Acquisition</div>
+                        </div>
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 card-hover">
+                            <div class="font-medium">Market Research & Analysis</div>
+                        </div>
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 card-hover">
+                            <div class="font-medium">CRM & Sales Funnel</div>
+                        </div>
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 card-hover">
+                            <div class="font-medium">Negotiation & Communication</div>
+                        </div>
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 card-hover">
+                            <div class="font-medium">Business Strategy Support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="fade-in delay-2">
+                    <h3 class="text-xl font-semibold mb-6">Languages</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Russian</span>
+                                <span class="text-white/50">Native</span>
+                            </div>
+                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full w-full line-gradient"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>English</span>
+                                <span class="text-white/50">B2</span>
+                            </div>
+                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full w-4/5 line-gradient"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Spanish</span>
+                                <span class="text-white/50">A2</span>
+                            </div>
+                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full w-2/5 line-gradient"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-6 bg-white/[0.02]">
+        <div class="max-w-6xl mx-auto">
+            <div class="fade-in">
+                <div class="w-12 h-1 line-gradient rounded-full mb-4"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Professional Experience</h2>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Experience 1 -->
+                <div class="fade-in delay-1 p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <div class="flex flex-col md:flex-row md:justify-between mb-3">
+                        <div>
+                            <h3 class="text-xl font-semibold">Business Development Representative</h3>
+                            <div class="text-purple-400">Freelance Digital Projects</div>
+                        </div>
+                        <div class="text-white/50 mt-2 md:mt-0">2025 - present</div>
+                    </div>
+                    <ul class="text-white/70 space-y-2 mt-4">
+                        <li>• Built and optimized website to improve conversion and digital presence</li>
+                        <li>• Conducted benchmark analysis and communication audit to identify growth opportunities</li>
+                        <li>• Generated B2B leads through website development and Google Ads campaigns</li>
+                        <li>• Managed partner outreach and participated in negotiations</li>
+                    </ul>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="fade-in delay-2 p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <div class="flex flex-col md:flex-row md:justify-between mb-3">
+                        <div>
+                            <h3 class="text-xl font-semibold">Technical Department Specialist</h3>
+                            <div class="text-purple-400">BIMAX PRO LLC</div>
+                        </div>
+                        <div class="text-white/50 mt-2 md:mt-0">2024 - 2025</div>
+                    </div>
+                    <ul class="text-white/70 space-y-2 mt-4">
+                        <li>• Supported company rebranding and positioning strategy</li>
+                        <li>• Prepared promotional videos for the new product line</li>
+                        <li>• Participated in B2B negotiations with partners</li>
+                        <li>• Website design and implementation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="fade-in">
+                <div class="w-12 h-1 line-gradient rounded-full mb-4"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Education</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="fade-in delay-1 p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <div class="text-white/50 text-sm mb-2">2025 – 2026</div>
+                    <h3 class="text-lg font-semibold mb-1">Master's Degree</h3>
+                    <div class="text-purple-400">Communication Management</div>
+                    <div class="text-white/50 text-sm mt-2">Universitat Pompeu Fabra</div>
+                </div>
+
+                <div class="fade-in delay-2 p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <div class="text-white/50 text-sm mb-2">2021 – 2025</div>
+                    <h3 class="text-lg font-semibold mb-1">Bachelor's Degree</h3>
+                    <div class="text-purple-400">Software Engineering</div>
+                    <div class="text-white/50 text-sm mt-2">Volgograd State Technical University</div>
+                </div>
+
+                <div class="fade-in delay-3 p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <div class="text-white/50 text-sm mb-2">2022 – 2025</div>
+                    <h3 class="text-lg font-semibold mb-1">Bachelor's Degree</h3>
+                    <div class="text-purple-400">Economics</div>
+                    <div class="text-white/50 text-sm mt-2">Volgograd State Technical University</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 bg-white/[0.02]">
+        <div class="max-w-6xl mx-auto">
+            <div class="fade-in">
+                <div class="w-12 h-1 line-gradient rounded-full mb-4"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Projects & Achievements</h2>
+                <p class="text-white/60 mb-12 max-w-xl">Selected works and key accomplishments from my professional experience</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="fade-in delay-1 group p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <div class="aspect-video bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-xl mb-4 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
+                        <svg class="w-16 h-16 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Website Conversion Optimization</h3>
+                    <p class="text-white/60">Built and optimized business website improving conversion rates and digital presence for B2B lead generation.</p>
+                </div>
+
+                <div class="fade-in delay-2 group p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <div class="aspect-video bg-gradient-to-br from-green-500/20 to-teal-500/20 rounded-xl mb-4 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
+                        <svg class="w-16 h-16 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015
